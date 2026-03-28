@@ -5,6 +5,7 @@
 # Import Fernet encryption method from cryptography library
 # Fernet uses AES encryption
 import base64
+import getpass
 import sys
 from cryptography.fernet import Fernet, InvalidToken
 from cryptography.hazmat.primitives import hashes
@@ -14,7 +15,7 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 filename = input("Enter file to decrypt: ")
 
 # User enters the password for the file
-password = input("Enter password: ")
+password = getpass.getpass("Enter password: ")
 password = password.encode("utf-8")
 
 # Read encrypted data
@@ -39,7 +40,6 @@ try:
     # Decrypt
     fernet_obj = Fernet(key)
     decrypted_data = fernet_obj.decrypt(encrypted_data)
-    print("Decrypted file!")
 except InvalidToken:
     print("Error: Incorrect password or corrupted file.")
     sys.exit(1)
@@ -48,3 +48,4 @@ except InvalidToken:
 # Write decrypted data back into file
 with open(filename, "wb") as f:
     f.write(decrypted_data)
+    print("Decrypted file!")
