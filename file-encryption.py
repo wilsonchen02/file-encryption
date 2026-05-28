@@ -15,6 +15,7 @@ filepath = input("Enter path of file to encrypt: ")
 
 # User chooses a password for the file
 password = getpass.getpass("Enter password: ")
+# Save password in a byte format
 password = password.encode("utf-8")
 
 # Generate salt for the key generation
